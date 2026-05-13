@@ -267,3 +267,16 @@ CREATE TABLE fact_sales (
 
 );
 GO
+
+/* =========================================================
+   DIM_SOR
+========================================================= */
+
+CREATE TABLE dim_sor (
+
+    sor_sk INT IDENTITY(1,1) PRIMARY KEY,
+
+    staging_raw_table_name NVARCHAR(255)
+
+);
+GO

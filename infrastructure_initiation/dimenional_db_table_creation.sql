@@ -1,6 +1,42 @@
 USE ORDER_DDS;
 GO
 
+
+
+DROP TABLE IF EXISTS fact_sales;
+GO
+
+DROP TABLE IF EXISTS dim_sor;
+GO
+
+DROP TABLE IF EXISTS dim_dates;
+GO
+
+DROP TABLE IF EXISTS dim_territories;
+GO
+
+DROP TABLE IF EXISTS dim_region;
+GO
+
+DROP TABLE IF EXISTS dim_shippers;
+GO
+
+DROP TABLE IF EXISTS dim_products;
+GO
+
+DROP TABLE IF EXISTS dim_suppliers;
+GO
+
+DROP TABLE IF EXISTS dim_categories;
+GO
+
+DROP TABLE IF EXISTS dim_employees;
+GO
+
+DROP TABLE IF EXISTS dim_customers;
+GO
+
+
 /* =========================================================
    DIMENSION TABLES
 ========================================================= */
@@ -8,6 +44,8 @@ GO
 /* =========================
    DIM_CUSTOMERS
 ========================= */
+
+
 CREATE TABLE dim_customers (
 
     customer_sk INT IDENTITY(1,1) PRIMARY KEY,
@@ -237,6 +275,18 @@ CREATE TABLE fact_sales (
     CONSTRAINT fk_fact_date
         FOREIGN KEY (order_date_sk)
         REFERENCES dim_dates(date_sk)
+
+);
+GO
+
+USE ORDER_DDS;
+GO
+
+CREATE TABLE dim_sor (
+
+    sor_sk INT IDENTITY(1,1) PRIMARY KEY,
+
+    staging_raw_table_name NVARCHAR(255)
 
 );
 GO

@@ -1,3 +1,30 @@
+/*
+task4
+The dimensional database structure was derived using the primary key and foreign key relationships provided in Table 1 and Table 2.
+
+The business process identified for the warehouse is order and sales analysis. The central fact table is FactOrders, which stores transactional order metrics and references all related dimensions.
+
+The following dimension tables were identified:
+- DimCategories
+- DimCustomers
+- DimEmployees
+- DimProducts
+- DimRegion
+- DimShippers
+- DimSuppliers
+- DimTerritories
+- DimDates
+
+The dimensional model follows a star schema architecture where FactOrders is connected to all dimensions through surrogate foreign keys.
+
+Based on Group 7 requirements from Table 3:
+- DimCustomers and DimProducts use SCD Type 2
+- DimRegion and DimTerritories use SCD Type 4
+- DimSuppliers uses SCD Type 3
+- DimEmployees and DimShippers use SCD1 with delete
+- FactOrders follows a SNAPSHOT loading strategy
+*/
+
 USE ORDER_DDS;
 GO
 
@@ -281,6 +308,10 @@ GO
 
 USE ORDER_DDS;
 GO
+
+/* =========================================================
+   DIM_SOR
+========================================================= */
 
 CREATE TABLE dim_sor (
 

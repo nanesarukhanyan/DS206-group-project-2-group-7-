@@ -28,6 +28,44 @@ Based on Group 7 requirements from Table 3:
 USE ORDER_DDS;
 GO
 
+DROP TABLE IF EXISTS fact_orders;
+GO
+
+DROP TABLE IF EXISTS dim_region_history;
+GO
+
+DROP TABLE IF EXISTS dim_territories_history;
+GO
+
+DROP TABLE IF EXISTS dim_sor;
+GO
+
+DROP TABLE IF EXISTS dim_dates;
+GO
+
+DROP TABLE IF EXISTS dim_territories;
+GO
+
+DROP TABLE IF EXISTS dim_region;
+GO
+
+DROP TABLE IF EXISTS dim_shippers;
+GO
+
+DROP TABLE IF EXISTS dim_products;
+GO
+
+DROP TABLE IF EXISTS dim_suppliers;
+GO
+
+DROP TABLE IF EXISTS dim_categories;
+GO
+
+DROP TABLE IF EXISTS dim_employees;
+GO
+
+DROP TABLE IF EXISTS dim_customers;
+GO
 
 
 DROP TABLE IF EXISTS fact_sales;
@@ -79,7 +117,12 @@ CREATE TABLE dim_customers (
     postal_code NVARCHAR(20),
     country NVARCHAR(100),
     phone NVARCHAR(50),
-    fax NVARCHAR(50)
+    fax NVARCHAR(50),
+
+    effective_start_date DATE,
+    effective_end_date DATE,
+    is_current BIT DEFAULT 1
+
 
 );
 GO
@@ -102,7 +145,9 @@ CREATE TABLE dim_employees (
     postal_code NVARCHAR(20),
     country NVARCHAR(100),
     home_phone NVARCHAR(50),
-    extension NVARCHAR(20)
+    extension NVARCHAR(20),
+
+    is_deleted BIT DEFAULT 0
 
 );
 GO
@@ -129,7 +174,8 @@ CREATE TABLE dim_suppliers (
     contact_title NVARCHAR(100),
     address NVARCHAR(255),
     city NVARCHAR(100),
-    region NVARCHAR(100),
+    current_region NVARCHAR(100),
+    previous_region NVARCHAR(100),
     postal_code NVARCHAR(20),
     country NVARCHAR(100),
     phone NVARCHAR(50),
@@ -153,7 +199,12 @@ CREATE TABLE dim_products (
     units_in_stock INT,
     units_on_order INT,
     reorder_level INT,
-    discontinued BIT
+    discontinued BIT,
+
+    effective_start_date DATE,
+    effective_end_date DATE,
+    is_current BIT DEFAULT 1,
+    is_deleted BIT DEFAULT 0
 
 );
 GO
@@ -165,7 +216,9 @@ CREATE TABLE dim_shippers (
 
     shipper_id INT,
     company_name NVARCHAR(255),
-    phone NVARCHAR(50)
+    phone NVARCHAR(50),
+
+    is_deleted BIT DEFAULT 0
 
 );
 GO
@@ -181,6 +234,19 @@ CREATE TABLE dim_region (
 );
 GO
 
+CREATE TABLE dim_region_history (
+
+    region_history_sk INT IDENTITY(1,1) PRIMARY KEY,
+
+    region_id INT,
+    region_description NVARCHAR(255),
+
+    effective_start_date DATE,
+    effective_end_date DATE
+
+);
+GO
+
 CREATE TABLE dim_territories (
 
     territory_sk INT IDENTITY(1,1) PRIMARY KEY,
@@ -191,6 +257,21 @@ CREATE TABLE dim_territories (
 
 );
 GO
+
+CREATE TABLE dim_territories_history (
+
+    territory_history_sk INT IDENTITY(1,1) PRIMARY KEY,
+
+    territory_id NVARCHAR(50),
+    territory_description NVARCHAR(255),
+    region_id INT,
+
+    effective_start_date DATE,
+    effective_end_date DATE
+
+);
+GO
+
 
 
 /* =========================
@@ -212,9 +293,9 @@ GO
 
 
 
-CREATE TABLE fact_sales (
+CREATE TABLE fact_orders (
 
-    sales_sk INT IDENTITY(1,1) PRIMARY KEY,
+    fact_order_sk INT IDENTITY(1,1) PRIMARY KEY,
 
     customer_sk INT,
     employee_sk INT,

@@ -4,11 +4,11 @@ DECLARE @end_date DATE = '2024-12-31';
 INSERT INTO fact_error (
 
     staging_raw_id_sk,
-    OrderID,
-    CustomerID,
-    EmployeeID,
-    ShipVia,
-    OrderDate,
+    order_id,
+    customer_id,
+    employee_id,
+    ship_via,
+    order_date,
     error_reason
 
 )

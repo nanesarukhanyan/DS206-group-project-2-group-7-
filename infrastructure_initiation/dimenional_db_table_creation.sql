@@ -31,6 +31,12 @@ GO
 DROP TABLE IF EXISTS fact_orders;
 GO
 
+DROP TABLE IF EXISTS fact_error;
+GO
+
+DROP TABLE IF EXISTS fact_sales;
+GO
+
 DROP TABLE IF EXISTS dim_region_history;
 GO
 
@@ -66,42 +72,6 @@ GO
 
 DROP TABLE IF EXISTS dim_customers;
 GO
-
-
-DROP TABLE IF EXISTS fact_sales;
-GO
-
-DROP TABLE IF EXISTS dim_sor;
-GO
-
-DROP TABLE IF EXISTS dim_dates;
-GO
-
-DROP TABLE IF EXISTS dim_territories;
-GO
-
-DROP TABLE IF EXISTS dim_region;
-GO
-
-DROP TABLE IF EXISTS dim_shippers;
-GO
-
-DROP TABLE IF EXISTS dim_products;
-GO
-
-DROP TABLE IF EXISTS dim_suppliers;
-GO
-
-DROP TABLE IF EXISTS dim_categories;
-GO
-
-DROP TABLE IF EXISTS dim_employees;
-GO
-
-DROP TABLE IF EXISTS dim_customers;
-GO
-
-
 
 CREATE TABLE dim_customers (
 
@@ -358,6 +328,26 @@ CREATE TABLE dim_sor (
     sor_sk INT IDENTITY(1,1) PRIMARY KEY,
 
     staging_raw_table_name NVARCHAR(255)
+
+);
+GO
+
+
+CREATE TABLE fact_error (
+
+    fact_error_sk INT IDENTITY(1,1) PRIMARY KEY,
+
+    staging_raw_id_sk INT,
+
+    order_id INT,
+    customer_id NVARCHAR(10),
+    employee_id INT,
+    ship_via INT,
+    order_date DATETIME,
+
+    error_reason NVARCHAR(255),
+
+    error_date DATETIME DEFAULT GETDATE()
 
 );
 GO

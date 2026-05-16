@@ -64,14 +64,6 @@ DROP TABLE IF EXISTS dim_customers;
 GO
 
 
-/* =========================================================
-   DIMENSION TABLES
-========================================================= */
-
-/* =========================
-   DIM_CUSTOMERS
-========================= */
-
 
 CREATE TABLE dim_customers (
 
@@ -93,9 +85,6 @@ CREATE TABLE dim_customers (
 GO
 
 
-/* =========================
-   DIM_EMPLOYEES
-========================= */
 CREATE TABLE dim_employees (
 
     employee_sk INT IDENTITY(1,1) PRIMARY KEY,
@@ -118,10 +107,6 @@ CREATE TABLE dim_employees (
 );
 GO
 
-
-/* =========================
-   DIM_CATEGORIES
-========================= */
 CREATE TABLE dim_categories (
 
     category_sk INT IDENTITY(1,1) PRIMARY KEY,
@@ -134,9 +119,6 @@ CREATE TABLE dim_categories (
 GO
 
 
-/* =========================
-   DIM_SUPPLIERS
-========================= */
 CREATE TABLE dim_suppliers (
 
     supplier_sk INT IDENTITY(1,1) PRIMARY KEY,
@@ -158,9 +140,6 @@ CREATE TABLE dim_suppliers (
 GO
 
 
-/* =========================
-   DIM_PRODUCTS
-========================= */
 CREATE TABLE dim_products (
 
     product_sk INT IDENTITY(1,1) PRIMARY KEY,
@@ -180,9 +159,6 @@ CREATE TABLE dim_products (
 GO
 
 
-/* =========================
-   DIM_SHIPPERS
-========================= */
 CREATE TABLE dim_shippers (
 
     shipper_sk INT IDENTITY(1,1) PRIMARY KEY,
@@ -195,9 +171,6 @@ CREATE TABLE dim_shippers (
 GO
 
 
-/* =========================
-   DIM_REGION
-========================= */
 CREATE TABLE dim_region (
 
     region_sk INT IDENTITY(1,1) PRIMARY KEY,
@@ -208,10 +181,6 @@ CREATE TABLE dim_region (
 );
 GO
 
-
-/* =========================
-   DIM_TERRITORIES
-========================= */
 CREATE TABLE dim_territories (
 
     territory_sk INT IDENTITY(1,1) PRIMARY KEY,
@@ -243,13 +212,6 @@ GO
 
 
 
-/* =========================================================
-   FACT TABLE
-========================================================= */
-
-/* =========================
-   FACT_SALES
-========================= */
 CREATE TABLE fact_sales (
 
     sales_sk INT IDENTITY(1,1) PRIMARY KEY,
@@ -309,9 +271,6 @@ GO
 USE ORDER_DDS;
 GO
 
-/* =========================================================
-   DIM_SOR
-========================================================= */
 
 CREATE TABLE dim_sor (
 

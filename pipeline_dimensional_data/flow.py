@@ -1,3 +1,4 @@
+from logging import setup_logger
 from utils import generate_execution_id, parse_database_config
 
 from pipeline_dimensional_data.tasks import (
@@ -14,12 +15,16 @@ class DimensionalDataFlow:
     def __init__(self, config_path):
 
         self.execution_id = generate_execution_id()
+       
+        self.logger = setup_logger(self.execution_id)
+        self.logger.info("Dimensional data flow initialized")
 
         self.config_path = config_path
 
         self.db_config = parse_database_config(config_path)
 
     def exec(self, start_date, end_date):
+        self.logger.info("Dimensional data flow started")
 
         connection = create_connection(self.db_config)
 
@@ -31,6 +36,7 @@ class DimensionalDataFlow:
             )
 
             if not result["success"]:
+                self.logger.error(f"Task failed: {result}")
                 return result
 
             dimension_scripts = {
@@ -55,6 +61,7 @@ class DimensionalDataFlow:
                 )
 
                 if not result["success"]:
+                    self.logger.error(f"Task failed: {result}")
                     return result
 
             result = update_fact_table(
@@ -68,6 +75,7 @@ class DimensionalDataFlow:
             )
 
             if not result["success"]:
+                self.logger.error(f"Task failed: {result}")
                 return result
 
             result = update_fact_error_table(
@@ -81,8 +89,11 @@ class DimensionalDataFlow:
             )
 
             if not result["success"]:
+                self.logger.error(f"Task failed: {result}")
                 return result
-
+            
+            self.logger.info("Dimensional data flow finished successfully")
+            
             return {
                 "success": True,
                 "execution_id": self.execution_id

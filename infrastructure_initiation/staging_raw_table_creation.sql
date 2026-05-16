@@ -1,9 +1,37 @@
 USE ORDER_DDS;
 GO
 
----------------------------------------------------
--- STAGING RAW: Categories
----------------------------------------------------
+DROP TABLE IF EXISTS staging_order_details_raw;
+GO
+
+DROP TABLE IF EXISTS staging_orders_raw;
+GO
+
+DROP TABLE IF EXISTS staging_products_raw;
+GO
+
+DROP TABLE IF EXISTS staging_categories_raw;
+GO
+
+DROP TABLE IF EXISTS staging_customers_raw;
+GO
+
+DROP TABLE IF EXISTS staging_employees_raw;
+GO
+
+DROP TABLE IF EXISTS staging_region_raw;
+GO
+
+DROP TABLE IF EXISTS staging_shippers_raw;
+GO
+
+DROP TABLE IF EXISTS staging_suppliers_raw;
+GO
+
+DROP TABLE IF EXISTS staging_territories_raw;
+GO
+
+
 CREATE TABLE staging_categories_raw (
     staging_raw_id_sk INT IDENTITY(1,1) PRIMARY KEY,
 
@@ -13,9 +41,6 @@ CREATE TABLE staging_categories_raw (
 );
 GO
 
----------------------------------------------------
--- STAGING RAW: Customers
----------------------------------------------------
 CREATE TABLE staging_customers_raw (
     staging_raw_id_sk INT IDENTITY(1,1) PRIMARY KEY,
 
@@ -33,9 +58,7 @@ CREATE TABLE staging_customers_raw (
 );
 GO
 
----------------------------------------------------
--- STAGING RAW: Employees
----------------------------------------------------
+
 CREATE TABLE staging_employees_raw (
     staging_raw_id_sk INT IDENTITY(1,1) PRIMARY KEY,
 
@@ -59,9 +82,7 @@ CREATE TABLE staging_employees_raw (
 );
 GO
 
----------------------------------------------------
--- STAGING RAW: Order Details
----------------------------------------------------
+
 CREATE TABLE staging_order_details_raw (
     staging_raw_id_sk INT IDENTITY(1,1) PRIMARY KEY,
 
@@ -73,9 +94,7 @@ CREATE TABLE staging_order_details_raw (
 );
 GO
 
----------------------------------------------------
--- STAGING RAW: Orders
----------------------------------------------------
+
 CREATE TABLE staging_orders_raw (
     staging_raw_id_sk INT IDENTITY(1,1) PRIMARY KEY,
 
@@ -97,9 +116,6 @@ CREATE TABLE staging_orders_raw (
 );
 GO
 
----------------------------------------------------
--- STAGING RAW: Products
----------------------------------------------------
 CREATE TABLE staging_products_raw (
     staging_raw_id_sk INT IDENTITY(1,1) PRIMARY KEY,
 
@@ -116,9 +132,7 @@ CREATE TABLE staging_products_raw (
 );
 GO
 
----------------------------------------------------
--- STAGING RAW: Region
----------------------------------------------------
+
 CREATE TABLE staging_region_raw (
     staging_raw_id_sk INT IDENTITY(1,1) PRIMARY KEY,
 
@@ -127,9 +141,7 @@ CREATE TABLE staging_region_raw (
 );
 GO
 
----------------------------------------------------
--- STAGING RAW: Shippers
----------------------------------------------------
+
 CREATE TABLE staging_shippers_raw (
     staging_raw_id_sk INT IDENTITY(1,1) PRIMARY KEY,
 
@@ -139,9 +151,7 @@ CREATE TABLE staging_shippers_raw (
 );
 GO
 
----------------------------------------------------
--- STAGING RAW: Suppliers
----------------------------------------------------
+
 CREATE TABLE staging_suppliers_raw (
     staging_raw_id_sk INT IDENTITY(1,1) PRIMARY KEY,
 
@@ -160,9 +170,7 @@ CREATE TABLE staging_suppliers_raw (
 );
 GO
 
----------------------------------------------------
--- STAGING RAW: Territories
----------------------------------------------------
+
 CREATE TABLE staging_territories_raw (
     staging_raw_id_sk INT IDENTITY(1,1) PRIMARY KEY,
 
